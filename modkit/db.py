@@ -1,11 +1,10 @@
+from sqlalchemy.orm import declarative_base, sessionmaker, Session
+from sqlalchemy.engine import Engine
 from typing import Generator
 
-from sqlalchemy.orm import declarative_base, sessionmaker, Session
-from sqlalchemy import create_engine, Engine
-
 Base = declarative_base()
-engine: Engine | None = None
-SessionLocal: sessionmaker | None = None
+engine: Engine = None
+SessionLocal: sessionmaker = None
 
 def init_db(external_engine: Engine):
     global engine, SessionLocal
@@ -13,9 +12,9 @@ def init_db(external_engine: Engine):
     SessionLocal = sessionmaker(bind=engine)
 
 def get_db() -> Generator[Session, None, None]:
-    if SessionLocal or engine is None:
+    if SessionLocal is None:
         raise RuntimeError("Database not initialized. Call init_db() first.")
-
+    
     db = SessionLocal()
     try:
         yield db
