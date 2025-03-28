@@ -1,0 +1,10 @@
+[tool.poetry]
+name = "modkit"
+version = "0.1.0"
+description = "Shared module toolkit for external FastAPI plugins"
+authors = ["Your Name <you@example.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+fastapi = {extras = ["standard"], version = "^0.115.12"}
+sqlalchemy = "*"
