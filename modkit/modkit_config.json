@@ -1,9 +1,3 @@
 {
-  "installed_modules": {
-    "blog": {
-      "enabled": false,
-      "path": "blog/",
-      "source": "local"
-    }
-  }
+  "installed_modules": {}
 }
