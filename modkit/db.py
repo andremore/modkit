@@ -3,8 +3,8 @@ from sqlalchemy.engine import Engine
 from typing import Generator
 
 Base = declarative_base()
-engine: Engine = None
-SessionLocal: sessionmaker = None
+engine: Engine | None = None
+SessionLocal: sessionmaker | None= None
 
 def init_db(external_engine: Engine):
     global engine, SessionLocal
@@ -12,7 +12,7 @@ def init_db(external_engine: Engine):
     SessionLocal = sessionmaker(bind=engine)
 
 def get_db() -> Generator[Session, None, None]:
-    if SessionLocal is None:
+    if SessionLocal or engine is None:
         raise RuntimeError("Database not initialized. Call init_db() first.")
     
     db = SessionLocal()
